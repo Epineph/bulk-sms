@@ -1,0 +1,175 @@
+---
+title: ""
+author: ""
+date: ""
+output:
+  pdf_document:
+    latex_engine: lualatex
+    number_sections: false
+geometry: margin=2.5cm
+fontsize: 11pt
+mainfont: "TeX Gyre Termes"
+header-includes:
+  - \usepackage{xcolor}
+  - \usepackage{hyperref}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{amsmath}
+  - \usepackage{siunitx}
+---
+
+```{r, include=FALSE}
+# Denne ansøgning er skrevet i Rmarkdown, og kildekoden kan findes på github:
+# https://www.github.com/Epineph/ansoegning-kildekode.git
+if (!requireNamespace("rstudioapi", quietly = TRUE)) {
+  install.packages("rstudioapi")
+}
+library("rstudioapi", character.only = TRUE)
+
+danish_date <- function(x = Sys.Date()) {
+  months_da <- c(
+    "januar", "februar", "marts", "april", "maj", "juni",
+    "juli", "august", "september", "oktober", "november",
+    "december"
+  )
+
+  day   <- format(x, "%d")
+  month <- months_da[as.integer(format(x, "%m"))]
+  year  <- format(x, "%Y")
+
+  paste(day, month, year)
+}
+```
+
+
+```{r, include=FALSE}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```
+
+```{r setup, include=FALSE}
+
+make_link <- function(url, text, color = "blue") {
+  if (knitr::is_latex_output()) {
+    sprintf(
+      "\\href{%s}{\\textcolor{%s}{\\uline{%s}}}",
+      url, color, text
+    )
+  } else if (knitr::is_html_output()) {
+    sprintf(
+      '<a href="%s" class="custom-link">%s</a>',
+      url, text
+    )
+  } else {
+    sprintf("[%s](%s)", text, url)
+  }
+}
+```
+
+
+$$
+T_{\mathrm{host}} = T_{\mathrm{parse}} + T_{\mathrm{validate}} + T_{\mathrm{format}} + T_{\mathrm{persist}}
+$$
+
+
+$$
+t_1, t_2, \ldots, t_n
+$$
+
+
+
+$$
+\bar{t} = \frac{1}{n}\sum_{i=1}^{n} t_i
+$$
+
+
+$$
+s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(t_i - \bar{t})^2}
+$$
+
+
+$$
+\mathrm{SEM} = \frac{s}{\sqrt{n}}
+$$
+
+$$
+\mathrm{CI}_{95} = \bar{t} \pm 1.96 \cdot \mathrm{SEM}
+$$
+
+$$
+d_{\mathrm{host}} = 1.1 \cdot \max\!\left(q_{0.99}, \bar{t} + 3s\right)
+$$
+
+$$
+T_{\mathrm{total}} = T_{\mathrm{host}} + T_{\mathrm{smsd\,sched}} + T_{\mathrm{USB/serial}} + T_{\mathrm{modem}} + T_{\mathrm{carrier}}
+$$
+$$
+T_{\mathrm{USB/serial}},\ T_{\mathrm{modem}},\ T_{\mathrm{carrier}}
+$$
+
+$$
+d_{\mathrm{prior}} = d_{\mathrm{host}} + p_{\mathrm{scheduling}} + p_{\mathrm{hardware\ residual}}
+$$
+
+$$
+p_{\mathrm{scheduling}} \approx 1000\,\mathrm{ms}
+$$
+
+$$
+p_{\mathrm{hardware\ residual}}
+$$
+
+$$
+d_{\mathrm{pre}} = 1.1 \cdot \max\!\left(q_{0.99,\mathrm{host}}, \bar{t}_{\mathrm{host}} + 3s_{\mathrm{host}}\right) + p_{\mathrm{scheduling}} + p_{\mathrm{hardware\ residual}}
+$$
+
+$$
+p_{\mathrm{hardware\ residual}} = 0
+$$
+
+
+$$
+p_{\mathrm{scheduling}} = 1000\,\mathrm{ms}
+$$
+
+$$
+p_{\mathrm{hardware\ residual}} = 0
+$$
+$$
+p_{\mathrm{hardware\ residual}} > 0
+$$
+$$
+t_i = \frac{t_{i,\mathrm{end},\mathrm{ns}} - t_{i,\mathrm{start},\mathrm{ns}}}{10^6}\,\mathrm{ms}
+$$
+
+$$
+T_{\mathrm{measured}} = T_{\mathrm{host}} + T_{\mathrm{sleep}} + T_{\mathrm{scheduler\ jitter}}
+$$
+
+$$
+\bar{t},\ s,\ \mathrm{SEM},\ \mathrm{CI}_{95},\ q_{0.95},\ q_{0.99},\ t_{\max}
+$$
+$$
+d_{\mathrm{host}} = 1.1 \cdot \max\!\left(q_{0.99}, \bar{t} + 3s\right)
+$$
+
+$$
+d_{\mathrm{pre}} = d_{\mathrm{host}} + 1000\,\mathrm{ms}
+$$
+
+$$
+t_i^{\mathrm{real}}
+$$
+
+$$
+r_i = t_i^{\mathrm{real}} - t_i^{\mathrm{host}}
+$$
+
+
+$$
+p_{\mathrm{hardware\ residual}} = 1.1 \cdot \max\!\left(q_{0.99}(r), \bar{r} + 3s_r\right)
+$$
+
+$$
+d_{\mathrm{post}} = 1.1 \cdot \max\!\left(q_{0.99,\mathrm{real}}, \bar{t}_{\mathrm{real}} + 3s_{\mathrm{real}}\right)
+$$
+
+
